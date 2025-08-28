@@ -33,8 +33,16 @@ public class ClientService {
 
     }
 
-    public Client update(Client client){
-        return clientRepository.save(client);
+    public Client update(Long id, Client clientUpdated){
+        return clientRepository.findById(id).map(
+            client -> {
+            client.setName(clientUpdated.getName());
+            client.setEmail(clientUpdated.getEmail());
+            client.setBirthDate(clientUpdated.getBirthDate());
+            client.setCpf(clientUpdated.getCpf());
+            return clientRepository.save(client);
+    }).orElseThrow(() -> new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Cliente não encontrado"));
     }
 
     public List<Client> getAll(){

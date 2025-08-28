@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -53,8 +55,12 @@ public class ClientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ClientDTO create(@PathVariable("id") Long id, @RequestBody Client client){
+    public ClientDTO create(@RequestBody Client client){
         return new ClientDTO(clientService.create(client.getName(), client.getEmail(), client.getCpf(), client.getBirthDate()));
     }
-    
+
+    @PutMapping("/{id}")
+    public ClientDTO update(@PathVariable("id") Long id, Client client){
+        return new ClientDTO(clientService.update(id, client));
+    }
 }
