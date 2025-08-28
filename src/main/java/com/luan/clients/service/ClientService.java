@@ -1,5 +1,6 @@
 package com.luan.clients.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,12 @@ public class ClientService {
         this.clientRepository = clientRepository;
     }
 
-    public Client create(Client client){
+    public Client create(String name, String email, int cpf, LocalDate birthDate){
+        Client client = new Client();
+        client.setName(name);
+        client.setEmail(email);
+        client.setCpf(cpf);
+        client.setBirthDate(birthDate);
         return clientRepository.save(client);
     }
 

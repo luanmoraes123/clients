@@ -5,7 +5,6 @@ import java.time.Period;
 
 public class ClientDTO {
     
-    private Long id;
     private String name;
     private String email;
     private int cpf;
@@ -14,7 +13,6 @@ public class ClientDTO {
     
     
     public ClientDTO(Client client) {
-        this.id = client.getId();
         this.name = client.getName();
         this.email = client.getEmail();
         this.cpf = client.getCpf();
@@ -26,12 +24,6 @@ public class ClientDTO {
         return Period.between(dataNascimento, LocalDate.now()).getYears();
     }
 
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
     public String getName() {
         return name;
     }
