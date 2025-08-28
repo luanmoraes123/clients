@@ -40,7 +40,7 @@ public class ClientController {
     }
     
     @GetMapping("id")
-    public ClientDTO getMethodName(@PathVariable("id") Long id) {
+    public ClientDTO getOne(@PathVariable("id") Long id) {
        return new ClientDTO(clientService.findById(id));
     }
     
@@ -53,7 +53,7 @@ public class ClientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ClientDTO update(@PathVariable("id") Long id, @RequestBody Client client){
+    public ClientDTO create(@PathVariable("id") Long id, @RequestBody Client client){
         return new ClientDTO(clientService.create(client.getName(), client.getEmail(), client.getCpf(), client.getBirthDate()));
     }
     
