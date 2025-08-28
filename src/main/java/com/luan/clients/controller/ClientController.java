@@ -30,14 +30,13 @@ public class ClientController {
     @GetMapping
     public List<ClientDTO> list(@RequestParam String page) {
         return clientService.getAll().stream()
-        .map(client -> new ClientDTO(
-                client.getId(),
-                client.getName(),
-                client.getEmail(),
-                client.getCpf(),
-                client.getBirthDate()
-        ))
+        .map(client -> new ClientDTO(client))
         .collect(Collectors.toList());
+    }
+    
+    @GetMapping("id")
+    public ClientDTO getMethodName(@PathVariable("id") Long id) {
+       return new ClientDTO(clientService.findById(id));
     }
     
 

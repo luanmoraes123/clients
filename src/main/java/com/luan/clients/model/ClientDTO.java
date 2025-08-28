@@ -13,13 +13,13 @@ public class ClientDTO {
     private int age;
     
     
-    public ClientDTO(Long id, String name, String email, int cpf, LocalDate birthDate) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.cpf = cpf;
-        this.birthDate = birthDate;
-        this.age = calcularIdade(birthDate);
+    public ClientDTO(Client client) {
+        this.id = client.getId();
+        this.name = client.getName();
+        this.email = client.getEmail();
+        this.cpf = client.getCpf();
+        this.birthDate = client.getBirthDate();
+        this.age = calcularIdade(this.birthDate);
     }
 
     private static int calcularIdade(LocalDate dataNascimento) {
