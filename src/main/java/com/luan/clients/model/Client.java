@@ -1,4 +1,4 @@
-package com.luan.clients.entity;
+package com.luan.clients.model;
 
 import java.time.LocalDate;
 
@@ -19,7 +19,7 @@ public class Client {
     private int cpf;
     private String email;
     private LocalDate birthDate;
-    
+
     public Long getId() {
         return id;
     }
