@@ -16,7 +16,7 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private int cpf;
+    private Long cpf;
     private String email;
     private LocalDate birthDate;
 
@@ -32,10 +32,10 @@ public class Client {
     public void setName(String name) {
         this.name = name;
     }
-    public int getCpf() {
+    public Long getCpf() {
         return cpf;
     }
-    public void setCpf(int cpf) {
+    public void setCpf(Long cpf) {
         this.cpf = cpf;
     }
     public String getEmail() {

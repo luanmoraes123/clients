@@ -7,6 +7,7 @@ import com.luan.clients.model.Client;
 import com.luan.clients.model.ClientDTO;
 import com.luan.clients.service.ClientService;
 
+import ch.qos.logback.core.joran.conditional.IfAction;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,10 +37,15 @@ public class ClientController {
     }
 
     @GetMapping
-    public List<ClientDTO> list(@RequestParam int page, int itens) {
-        return clientService.getAll(PageRequest.of(page, itens)).stream()
-        .map(client -> new ClientDTO(client))
-        .collect(Collectors.toList());
+    public List<ClientDTO> list(@RequestParam(required = false) Integer page,@RequestParam(required = false) Integer itens) {
+        if (page != null && itens != null) {        
+            return clientService.getAll(PageRequest.of(page, itens)).stream()
+            .map(client -> new ClientDTO(client))
+            .collect(Collectors.toList());
+        }
+        return clientService.findAll().stream()
+            .map(client -> new ClientDTO(client))
+            .collect(Collectors.toList());
     }
     
     @GetMapping("id")
@@ -57,7 +63,7 @@ public class ClientController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ClientDTO create(@RequestBody Client client){
-        return new ClientDTO(clientService.create(client.getName(), client.getEmail(), client.getCpf(), client.getBirthDate()));
+        return new ClientDTO(clientService.create(client));
     }
 
     @PutMapping("/{id}")

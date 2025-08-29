@@ -7,7 +7,7 @@ public class ClientDTO {
     
     private String name;
     private String email;
-    private int cpf;
+    private Long cpf;
     private LocalDate birthDate;
     private int age;
     
@@ -36,10 +36,10 @@ public class ClientDTO {
     public void setEmail(String email) {
         this.email = email;
     }
-    public int getCpf() {
+    public Long getCpf() {
         return cpf;
     }
-    public void setCpf(int cpf) {
+    public void setCpf(Long cpf) {
         this.cpf = cpf;
     }
     public LocalDate getBirthDate() {

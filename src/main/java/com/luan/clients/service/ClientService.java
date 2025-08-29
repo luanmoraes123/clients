@@ -1,6 +1,7 @@
 package com.luan.clients.service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,12 +21,7 @@ public class ClientService {
         this.clientRepository = clientRepository;
     }
 
-    public Client create(String name, String email, int cpf, LocalDate birthDate){
-        Client client = new Client();
-        client.setName(name);
-        client.setEmail(email);
-        client.setCpf(cpf);
-        client.setBirthDate(birthDate);
+    public Client create(Client client){
         return clientRepository.save(client);
     }
 
@@ -48,6 +44,10 @@ public class ClientService {
 
     public Page<Client> getAll(Pageable pageable){
         return clientRepository.findAll(pageable);
+    }
+
+    public List<Client> findAll(){
+        return clientRepository.findAll();
     }
 
     public void delete(Long id){
