@@ -7,7 +7,6 @@ import com.luan.clients.model.Client;
 import com.luan.clients.model.ClientDTO;
 import com.luan.clients.service.ClientService;
 
-import ch.qos.logback.core.joran.conditional.IfAction;
 
 import java.util.List;
 import java.util.stream.Collectors;

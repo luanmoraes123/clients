@@ -1,6 +1,5 @@
 package com.luan.clients.service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
