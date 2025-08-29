@@ -1,8 +1,9 @@
 package com.luan.clients.service;
 
 import java.time.LocalDate;
-import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -45,8 +46,8 @@ public class ClientService {
                     HttpStatus.NOT_FOUND, "Cliente não encontrado"));
     }
 
-    public List<Client> getAll(){
-        return clientRepository.findAll();
+    public Page<Client> getAll(Pageable pageable){
+        return clientRepository.findAll(pageable);
     }
 
     public void delete(Long id){

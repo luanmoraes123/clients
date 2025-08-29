@@ -11,6 +11,7 @@ import com.luan.clients.service.ClientService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,8 +36,8 @@ public class ClientController {
     }
 
     @GetMapping
-    public List<ClientDTO> list(@RequestParam String page) {
-        return clientService.getAll().stream()
+    public List<ClientDTO> list(@RequestParam int page, int itens) {
+        return clientService.getAll(PageRequest.of(page, itens)).stream()
         .map(client -> new ClientDTO(client))
         .collect(Collectors.toList());
     }
