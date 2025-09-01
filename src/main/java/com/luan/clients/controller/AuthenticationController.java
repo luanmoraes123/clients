@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("auth")
 public class AuthenticationController {
     
     @Autowired

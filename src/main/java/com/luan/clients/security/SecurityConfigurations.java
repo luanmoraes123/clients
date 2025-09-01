@@ -32,9 +32,7 @@ public class SecurityConfigurations {
                     .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                     .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                     .requestMatchers("/swagger-ui.html", "/swagger-ui/**").permitAll()
-                    .requestMatchers("/v3/api-docs/**").permitAll()
-                    .requestMatchers("/swagger-resources/**").permitAll()
-                    .requestMatchers("/webjars/**").permitAll()
+                    .requestMatchers("/swagger-ui/**").permitAll()
                     .anyRequest().authenticated()
             )
             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
@@ -58,7 +56,7 @@ public WebMvcConfigurer corsConfigurer() {
         public void addCorsMappings(CorsRegistry registry) {
             registry.addMapping("/**")
                     .allowedMethods("*")
-                    .allowedOrigins("*"); // para teste, depois restringir
+                    .allowedOrigins("*"); 
         }
     };
 }
