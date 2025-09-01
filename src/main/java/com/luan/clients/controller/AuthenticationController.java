@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.luan.clients.model.AuthenticationDTO;
 import com.luan.clients.model.User;
 import com.luan.clients.repository.UserRepository;
+import com.luan.clients.service.UserService;
 
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,9 +28,12 @@ public class AuthenticationController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserService userService;
+
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data){
-        var userData = new UsernamePasswordAuthenticationToken(data.username(), data.password());
+        var userData = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = authenticationManager.authenticate(userData);
         return ResponseEntity.ok().build();
     }
@@ -37,10 +41,14 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody @Valid AuthenticationDTO data){
-        if(this.userRepository.findByUsername(data.username()) != null) return ResponseEntity.badRequest().build();
+        
+        if(this.userService.loadUserByUsername(data.login()) != null){
+            System.out.println("chegou aqui");
+            return ResponseEntity.badRequest().build();
+        } 
 
         String newPassword = new BCryptPasswordEncoder().encode(data.password());
-        User user = new User(data.username(), newPassword);
+        User user = new User(data.login(), newPassword);
 
         userRepository.save(user);
 

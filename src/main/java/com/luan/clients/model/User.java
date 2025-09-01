@@ -3,7 +3,7 @@ package com.luan.clients.model;
 import jakarta.persistence.Table;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Collections;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,35 +23,34 @@ public class User implements UserDetails{
     private Long id;
 
     @Column(unique = true, nullable = false)
-    private String username;
+    private String login;
 
     @Column(nullable = false)
     private String password;
 
 
-    public User(String username, String password) {
-        this.username = username;
+    public User() {}
+
+    public User(String login, String password) {
+        this.login = login;
         this.password = password;
     }
 
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
-    }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
@@ -60,8 +59,11 @@ public class User implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return Collections.emptyList();
     }
 
-
+    @Override
+    public String getUsername() {
+        return this.login;
+    }
 }
